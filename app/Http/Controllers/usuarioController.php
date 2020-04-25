@@ -13,7 +13,10 @@ class usuarioController extends Controller
      */
     public function index()
     {
-        //
+        $nombre='nilda';
+        $apellido='huayta';
+        return view('login',compact('nombre','apellido'));
+
     }
 
     /**
@@ -81,13 +84,13 @@ class usuarioController extends Controller
     {
         //
     }
-    public function usuarioRegister(Request $request)
-    {
-        dd($request->email);
-    }
-
-    public function getformulario()
-    {
-        return view('login');
-    }
+//    public function usuarioRegister(Request $request)
+//    {
+//        dd($request->email);
+//    }
+//
+//    public function getformulario()
+//    {
+//        return view('login');
+//    }
 }

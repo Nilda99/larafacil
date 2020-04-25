@@ -71,3 +71,8 @@ Route::get('/login',function (){
 });
 Route::post('/register','usuarioController@usuarioRegister')->name('usuario.register');
 Route::get('/formulario','usuarioController@getformulario')->name('formulario');
+
+Route::resource('usuario','usuarioController');
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
