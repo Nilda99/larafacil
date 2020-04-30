@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 
 class usuarioController extends Controller
@@ -13,9 +14,9 @@ class usuarioController extends Controller
      */
     public function index()
     {
-        $nombre='nilda';
-        $apellido='huayta';
-        return view('login',compact('nombre','apellido'));
+        $usuarios= User::all();
+//dd($usuarios);
+        return view('usuarios.index',compact('usuarios'));
 
     }
 
