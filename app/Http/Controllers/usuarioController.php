@@ -72,6 +72,9 @@ class usuarioController extends Controller
     public function edit($id)
     {
         //devuelve una vista
+//        dd($id);
+        $usuario=User::find($id);
+        return view('usuarios.edit',compact('usuario'));
     }
 
     /**
@@ -84,6 +87,15 @@ class usuarioController extends Controller
     public function update(Request $request, $id)
     {
         //actualizacion
+//        User::find($id)->update($request->all());
+        $usuario = User::find($id);
+        $usuario->name=$request->name;
+        $usuario->email=$request->email;
+        $usuario->update();
+        return redirect('usuarios');
+
+//        return redirect()->route('usuarios.index')->with('success','Registro actualizado satisfactoriamente');
+
     }
 
     /**
