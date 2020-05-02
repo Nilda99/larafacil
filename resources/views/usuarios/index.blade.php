@@ -26,16 +26,24 @@
                             <th scope="row">1</th>
                             <td>{{$usuario->name}}</td>
                             <td>{{$usuario->email}}</td>
-                            <td><a href="{{route('usuarios.edit',$usuario->id)}}" type="button" class="btn btn-warning">Editar
-                                </a>
+                            <td><a href="{{route('usuarios.edit',$usuario->id)}}"
+                                   class="btn btn-warning">Editar</a></td>
+                            <td>
+                                <form action="{{route('usuarios.destroy',$usuario->id)}}"
+                                      method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn btn-danger " type="submit"
+                                            onclick="return confirm('¿Seguro que desea eliminar?')">
+                                        Eliminar
+                                    </button>
+
+                                </form>
+
                             </td>
                         </tr>
+                        </tr>
                     @endforeach
-                    {{--                <tr>--}}
-                    {{--                    <th scope="row">2</th>--}}
-                    {{--                    <td>Jacob</td>--}}
-                    {{--                    <td>Thornton</td>--}}
-                    {{--                </tr>--}}
                     </tbody>
                 </table>
 
