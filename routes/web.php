@@ -78,3 +78,4 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('usuarios','usuarioController');
 //Route::get('/create','createController');
+Route::get('/buscarUsuario','UsuarioController@buscarUsuario')->name('usuario.buscar');

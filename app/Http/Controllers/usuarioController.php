@@ -18,9 +18,10 @@ class usuarioController extends Controller
      */
     public function index()
     {
-        $usuarios= User::all();
+        $usuarios = User::all();
+        $usuarios = User::orderby('name')->paginate(3);
 //dd($usuarios);
-        return view('usuarios.index',compact('usuarios'));
+        return view('usuarios.index', compact('usuarios'));
 
     }
 
@@ -38,27 +39,27 @@ class usuarioController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(RegisterUserRequest $request)
     {
         //registro a la tabla
 //        dd($request->name);
-        $usuario= new User();
+        $usuario = new User();
         $usuario->name = $request->name;
         $usuario->email = $request->email;
-        $usuario->password =  Hash::make( $request->password);
+        $usuario->password = Hash::make($request->password);
         $usuario->save();
 
-         return  redirect('usuarios');
+        return redirect('usuarios');
 
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -69,22 +70,22 @@ class usuarioController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
     {
         //devuelve una vista
 //        dd($id);
-        $usuario=User::find($id);
-        return view('usuarios.edit',compact('usuario'));
+        $usuario = User::find($id);
+        return view('usuarios.edit', compact('usuario'));
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateUserRequest $request, $id)
@@ -92,8 +93,8 @@ class usuarioController extends Controller
         //actualizacion
 //        User::find($id)->update($request->all());
         $usuario = User::find($id);
-        $usuario->name=$request->name;
-        $usuario->email=$request->email;
+        $usuario->name = $request->name;
+        $usuario->email = $request->email;
         $usuario->update();
         return redirect('usuarios');
 
@@ -104,7 +105,7 @@ class usuarioController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -112,7 +113,7 @@ class usuarioController extends Controller
         $usario = User::find($id);
         $usario->delete();
 //        dd($id);
-        return redirect()-> route('usuarios.index'); //
+        return redirect()->route('usuarios.index'); //
     }
 //    public function usuarioRegister(Request $request)
 //    {
@@ -123,4 +124,9 @@ class usuarioController extends Controller
 //    {
 //        return view('login');
 //    }
-}
+    public function buscarUsuario(Request $request)
+    {
+        $usuarios=User::name($request->name)->paginate(3);
+//        dd( $request->name);
+        return view('usuarios.index',compact('usuarios'));
+    }}
