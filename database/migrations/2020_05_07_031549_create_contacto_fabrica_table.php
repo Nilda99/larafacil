@@ -15,10 +15,12 @@ class CreateContactoFabricaTable extends Migration
     {
         Schema::create('contacto_fabrica', function (Blueprint $table) {
             $table->id('idContactoFabrica');
-            $table->unsignedInteger('idFabrica');
-            $table->foreign('idFabrica')->references('id')->on('users');
+            $table->unsignedBigInteger('idFabrica');
+            $table->foreign('idFabrica')->references('idFabrica')->on('fabrica');
 
-            $table->int('idTipoTelefono');
+            $table->unsignedBigInteger('idTipoTelefono');
+            $table->foreign('idTipoTelefono')->references('idTelefono')->on('tipo_telefono');
+
             $table->timestamps();
         });
     }
